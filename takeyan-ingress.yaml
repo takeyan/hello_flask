@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: takeyan-ingress
+  annotations: 
+    ingress.bluemix.net/rewrite-path: "serviceName=service20-service-np rewrite=/;serviceName=flask-service-np rewrite=/api"
+spec:
+  rules:
+  - host: takeyan-cluster.us-south.containers.appdomain.cloud
+    http:
+      paths:
+      - path: /flask
+        backend:
+          serviceName: flask-service-np
+          servicePort: 80
+      - path: /service20
+        backend:
+          serviceName: service20-service-np
+          servicePort: 80

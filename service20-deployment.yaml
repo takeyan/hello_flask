@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service20-deployment
+  labels:
+    app: service20
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service20
+  template:
+    metadata:
+      labels:
+        app: service20
+    spec:
+      containers:
+      - name: flask
+        image: takeyan/takeyan.service20_amd64:0.0.1
+        ports:
+        - containerPort: 1337

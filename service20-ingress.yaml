@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1 
+kind: Ingress 
+metadata: 
+  name: service20-ingress
+spec: 
+  rules: 
+  - host: takeyan-cluster.us-south.containers.appdomain.cloud
+    http: 
+      paths: 
+      - path: /
+        backend: 
+          serviceName: service20-service-np
+          servicePort: 80
