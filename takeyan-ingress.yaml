@@ -6,7 +6,7 @@ metadata:
     ingress.bluemix.net/rewrite-path: "serviceName=service20-service-np rewrite=/;serviceName=flask-service-np rewrite=/api"
 spec:
   rules:
-  - host: takeyan-cluster.us-south.containers.appdomain.cloud
+  - host: infraprotocluster.jp-tok.containers.appdomain.cloud
     http:
       paths:
       - path: /flask

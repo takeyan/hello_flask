@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flask
-        image: jp.icr.io/ns-infra_proto/flask:0.0.2
+        image: takeyan/flask:0.0.2
         ports:
         - containerPort: 5000
         env:
