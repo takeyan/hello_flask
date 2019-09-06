@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from datetime import datetime
 import os
+import syslog
+import json
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False  # 日本語文字化け対策
@@ -12,8 +14,10 @@ def post_api(key):
     json = request.get_json()
     json["podname"] = os.getenv('K8S_POD_NAME','null')
     json["pod_ip"] = os.getenv('K8S_POD_IP','null')
+    json["nodename"] = os.getenv('K8S_NODE_NAME','null')
     json["api"] = key
     json["timestamp"] = datetime.now().isoformat()
+    syslog.syslog('response:{}'.format(json))
     return jsonify(json)
 
 
@@ -25,9 +29,11 @@ def get_api(key):
         'query_string' : qsp,
         'podname' : os.getenv('K8S_POD_NAME','null'),
         'pod_ip' : os.getenv('K8S_POD_IP','null'),
+        'nodename' : os.getenv('K8S_NODE_NAME','null'),
         'api' : key,
         'timestamp' : datetime.now().isoformat()
     }
+    syslog.syslog(json.dumps(resp_data))
     return jsonify(resp_data)
 
 if __name__ == '__main__':
